@@ -11,7 +11,13 @@ import (
 type ConfigImpl struct {
 	Environment Env
 	Port        uint
+	HashBreak   int
 	DbConfig
+}
+
+// GetHashBreak implements Config.
+func (c *ConfigImpl) GetHashBreak() int {
+	return c.HashBreak
 }
 
 type DbConfig struct {
@@ -48,6 +54,10 @@ func NewConfig() (Config, error) {
 	if err != nil {
 		return nil, err
 	}
+	hashBreak, err := common.ParseInt(os.Getenv("HASH_BREAK"))
+	if err != nil {
+		return nil, err
+	}
 	dbConfig, err := getDbConfig()
 	if err != nil {
 		return nil, err
@@ -56,6 +66,7 @@ func NewConfig() (Config, error) {
 	return &ConfigImpl{
 		Environment: Env(os.Getenv("ENV")),
 		Port:        *port,
+		HashBreak:   hashBreak,
 		DbConfig:    *dbConfig,
 	}, nil
 }

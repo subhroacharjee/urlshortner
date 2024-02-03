@@ -13,4 +13,5 @@ type Config interface {
 	GetEnv() Env
 	GetPort() uint
 	GetDSN() string
+	GetHashBreak() int
 }

@@ -17,7 +17,12 @@ func InitDependencies() {
 	Container.Provide(newGinEngine)
 	Container.Provide(logger.NewLogger)
 	Container.Provide(server.NewServer)
+
+	// functions which do not provide any new interface but is equally important
 	Container.Provide(db.NewDb)
+	if err := Container.Invoke(db.MigrateModels); err != nil {
+		panic(err)
+	}
 }
 
 func newGinEngine() *gin.Engine {
