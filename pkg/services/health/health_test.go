@@ -12,6 +12,11 @@ import (
 
 type mockConfig struct{}
 
+// GetHashBreak implements config.Config.
+func (mockConfig) GetHashBreak() int {
+	panic("unimplemented")
+}
+
 // GetDSN implements config.Config.
 func (mockConfig) GetDSN() string {
 	panic("unimplemented")
