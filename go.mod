@@ -4,7 +4,7 @@ go 1.21.6
 
 require (
 	github.com/gin-gonic/gin v1.9.1
-	gorm.io/gorm v1.25.5
+	gorm.io/gorm v1.25.9
 )
 
 require (
